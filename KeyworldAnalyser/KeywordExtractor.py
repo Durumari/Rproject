@@ -31,8 +31,8 @@ if __name__ == "__main__":
     _directory = '../TwitterCrawling/'
     _prefixName = 'twitterlist'
     _searchingKeyword = ['', '_dust']
-    _firstday= 518 # 17일 data '초'가 없어서 일단 제외함.
-    _lastday=527
+    _firstday= 517 # 17일 data '초'가 없어서 일단 제외함.
+    _lastday=518
    
     raw_data = ImportData(_directory, _prefixName, _searchingKeyword[0], _firstday, _lastday)
          
@@ -46,28 +46,52 @@ if __name__ == "__main__":
   
     # 일단 string type을 datetime type으로 변환.
     convertied_date =[]
+    prevtime = datetime.datetime(2010, 9, 12, 11, 19, 54)
+    print(prevtime)
     for idx in range(0, len(raw_data)):
-        convertied_date.append(datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M:%S").date())
         
-    raw_data['date'] = convertied_date # datatime 타입의 새로운 column 생성. 
+        if len(str(raw_data['created'][idx])) <= len('0000-00-00 00:00'):
+            print(raw_data['created'][idx])
+            convertied_date.append(datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M").date())
+            #prevtime = datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M").date()
+           # print(datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M").date())
+        elif len(str(raw_data['created'][idx])) <= len('0000-00-00 00:00:00'):
+            print(raw_data['created'][idx])
+            convertied_date.append(datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M:%S").date())
+            #prevtime = datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M").date()
+            #print(datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M").date())
+        #else:
+            #convertied_date.append(prevtime) #현재 레코드의 시간이 엉뚱하게 저장되어있을 경우 그냥 이전값으로. 
+            
         
-    lebels, uniques = pd.factorize(raw_data['date'])
+            
     
+    #print(0)
+    #print (convertied_date)
+    
+    #print(len(raw_data['created']))
+    #print(len(convertied_date))
+    raw_data['date'] = convertied_date # datatime 타입의 새로운 column 생성. 
+    #print(1)
+    lebels, uniques = pd.factorize(raw_data['date'])
+    #print(uniques)
 
     # 일별로 text를 merge해서 명사 추출
     
-        
-    for i in range(4, len(uniques)):
-        
+    kkma = Kkma()
+    for i in range(0, len(uniques)):
+        print(str(uniques[i]))
         dictionary_keyword ={}
         df = raw_data.loc[raw_data['date'] ==  uniques[i]]
         
         temp_cnt = 0
         for text in df['text']:
-            
-            #if temp_cnt > 3:
-                #break;
-            kkma = Kkma()
+            temp_cnt += 1            
+            #if temp_cnt < 2260:
+                #continue;
+           
+            print('#' + str(uniques[i])+' '+ str(temp_cnt) + ' th')
+            #print(text)
             nouns = kkma.nouns(text)
             
             for n in nouns:
@@ -76,8 +100,9 @@ if __name__ == "__main__":
                 else:
                     dictionary_keyword[n] = 0
             
-            print('#' + str(uniques[i])+' '+ str(temp_cnt) + ' th')
-            temp_cnt += 1
+            
+            
+            
        
         sorted_x = sorted(dictionary_keyword.items(), key=operator.itemgetter(1),  reverse=True)   
         
