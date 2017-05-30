@@ -7,6 +7,8 @@ from konlpy.tag import Kkma
 from konlpy.utils import pprint
 import operator
 import csv
+import gc
+import jpype
 
 
 def ImportData(directory, prefixName,searchingKeyword, firstday, lastday):
@@ -55,35 +57,44 @@ if __name__ == "__main__":
     
 
     # 일별로 text를 merge해서 명사 추출
+    kkma = Kkma()
     
-        
     for i in range(4, len(uniques)):
         
         dictionary_keyword ={}
         df = raw_data.loc[raw_data['date'] ==  uniques[i]]
         
-        temp_cnt = 0
+        
+        bunddle_text = ""
         for text in df['text']:
             
             #if temp_cnt > 3:
                 #break;
-            kkma = Kkma()
-            nouns = kkma.nouns(text)
+            #nouns = kkma.nouns(text)
+            bunddle_text +=(text + " ")
             
-            for n in nouns:
-                if n in dictionary_keyword:
-                    dictionary_keyword[n] += 1
-                else:
-                    dictionary_keyword[n] = 0
+        nouns = kkma.nouns(bunddle_text) 
+        #print(bunddle_text)
+        #fn = 'test_' + str(uniques[i]) + '.txt'
+        #with open(fn, 'w') as fp:
+            #fp.write(bunddle_text)
+        
+        temp_cnt = 0
+        for n in nouns:
+            if n in dictionary_keyword:
+                dictionary_keyword[n] += 1
+            else:
+                dictionary_keyword[n] = 0
             
             print('#' + str(uniques[i])+' '+ str(temp_cnt) + ' th')
             temp_cnt += 1
-       
+            
+            
         sorted_x = sorted(dictionary_keyword.items(), key=operator.itemgetter(1),  reverse=True)   
-        
+       
+        #csv로 저장
         writefilename = 'frequency_keyword_' + str(uniques[i]) + '.csv'
         
-         # csv로 저장
         with open(writefilename, 'w', newline='') as fp:
             csv_out = csv.writer(fp)
             csv_out.writerow(['keyword', 'frequency'])
