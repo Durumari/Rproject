@@ -9,16 +9,35 @@ import operator
 import csv
 
 
-def ImportData(directory, prefixName,searchingKeyword, firstday, lastday):
+def ImportData(directory, prefixName,searchingKeyword, year, firstday, lastday):
     data_for_days = []
  
-      #날짜 범위 입력 
-    for i in range (firstday, lastday):
-        day = "{:04d}".format(i)
-        filepath = directory + prefixName + '_' + day + searchingKeyword +'.csv'
-                
-        data = pd.read_csv(filepath, encoding='CP949') # encoding for korean.
+    from_date = datetime.datetime.strptime(str(year)+str(firstday), "%Y%m%d").date()
+    to_date = datetime.datetime.strptime(str(year)+str(lastday), "%Y%m%d").date()
     
+    delta = to_date - from_date
+    
+    list_between_days = []
+    for i in range(0, delta.days + 1):
+        list_between_days.append(from_date + datetime.timedelta(days=i))
+    
+    print(list_between_days)
+    
+      #날짜 범위 입력 
+    #for i in range (firstday, lastday):
+
+    for d0 in list_between_days:
+        
+        strDate = "{:02d}".format(d0.month) + "{:02d}".format(d0.day)
+        #day = "{:04d}".format(i)
+        print(strDate)
+        filepath = directory + prefixName  + searchingKeyword + '_' + strDate +'.csv'
+                
+        #ufilepath = filepath.encode('CP949')
+   
+        print(filepath)                
+        data = pd.read_csv(filepath, encoding='CP949') # encoding for korean.
+        
         data_for_days.append(data)
     
     return pd.concat(data_for_days, ignore_index = True) 
@@ -28,14 +47,21 @@ if __name__ == "__main__":
     #########################################################
     # raw data import
     #########################################################
-    _directory = '../TwitterCrawling/'
-    _prefixName = 'twitterlist'
-    _searchingKeyword = ['', '_dust']
-    _firstday= 517 # 17일 data '초'가 없어서 일단 제외함.
-    _lastday=518
-   
-    raw_data = ImportData(_directory, _prefixName, _searchingKeyword[0], _firstday, _lastday)
-         
+    _directory = '../TwitterCrawling/twitterData_0601/'
+    _prefixName = u'twitterlist'
+    _list_searchingKeyword = [u'_kangnamyeock', '_angoo', '_baljeonso', '_gongichungjunggi',
+                              '_hwangsa', '_kyeonyucha', '_mask','_muckum', '_muckutda', '_joonggook', '_miyeockgook'
+                              ,'_samgyeopsal']
+    
+    _searchingKeyword = _list_searchingKeyword[9]
+    
+    _year = 2017
+    _firstday = 525 
+    _lastday = 531 # 폐구간 [firstday, lastday]
+
+    
+    raw_data = ImportData(_directory, _prefixName, _searchingKeyword, _year, _firstday, _lastday) 
+    #print(raw_data)
 
     #print(raw_data['created'])
     
@@ -43,13 +69,13 @@ if __name__ == "__main__":
     #형태소 분석해서 날짜별로 키워드 빈도 추출
     #########################################################
     
-  
+    print('$All data is imported.')
     # 일단 string type을 datetime type으로 변환.
     convertied_date =[]
     prevtime = datetime.datetime(2010, 9, 12, 11, 19, 54)
-    print(prevtime)
+    #print(prevtime)
     for idx in range(0, len(raw_data)):
-        
+        print(str(idx) + "th ")
         if len(str(raw_data['created'][idx])) <= len('0000-00-00 00:00'):
             print(raw_data['created'][idx])
             convertied_date.append(datetime.datetime.strptime(raw_data['created'][idx], "%Y-%m-%d %H:%M").date())
@@ -106,14 +132,18 @@ if __name__ == "__main__":
        
         sorted_x = sorted(dictionary_keyword.items(), key=operator.itemgetter(1),  reverse=True)   
         
-        writefilename = 'frequency_keyword_' + str(uniques[i]) + '.csv'
+        writefilename = 'frequency_keyword_' +_prefixName +_searchingKeyword + '_' +str(uniques[i]) + '.csv'
         
          # csv로 저장
         with open(writefilename, 'w', newline='') as fp:
             csv_out = csv.writer(fp)
             csv_out.writerow(['keyword', 'frequency'])
-      
-            for i in range(0 , 500) : # 상위 500개
+     
+            if len(sorted_x[i]) > 500:
+                max = 500
+            else:
+                max = len(sorted_x[i])
+            for i in range(0 , max) : # 상위 500개
                 csv_out.writerow(sorted_x[i])
                 print(sorted_x[i])
 
