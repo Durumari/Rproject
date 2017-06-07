@@ -34,271 +34,30 @@ getCurRateLimitInfo()
 ###tweets <- searchTwitter(searchString = 'korea+love', n = 100)
 #tweets##
 
+####################################################################################################################
 # 특정 날짜 검색
-string <- '미세먼지'
+string <- '미세먼지+고등어'
 string <- iconv(string, 'CP949', 'UTF8')
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-16",until = "2017-05-17")
+tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-29",until = "2017-05-30")
 tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0517.csv")
 
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-17",until = "2017-05-18")
+
+tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-30",until = "2017-05-31")
 tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0518.csv")
 
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-18",until = "2017-05-19")
+tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-31",until = "2017-06-01")
 tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0519.csv")
 
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-19",until = "2017-05-20")
+tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-06-01",until = "2017-06-02")
 tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0520.csv")
 
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-20",until = "2017-05-21")
+tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-06-02",until = "2017-06-03")
 tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0521.csv")
 
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-21",until = "2017-05-22")
+tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-06-03",until = "2017-06-04")
 tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0522.csv")
 
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-22",until = "2017-05-23")
+tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-06-04",until = "2017-06-05")
 tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0523.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-23",until = "2017-05-24")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0524.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-24",until = "2017-05-25")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0525.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-25",until = "2017-05-26")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0526.csv")
 
 
-
-
-# 특정 날짜 검색
-string <- '먼지'
-string <- iconv(string, 'CP949', 'UTF8')
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-16",until = "2017-05-17")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0517_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-17",until = "2017-05-18")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0518_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-18",until = "2017-05-19")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0519_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-19",until = "2017-05-20")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0520_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-20",until = "2017-05-21")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0521_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-21",until = "2017-05-22")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0522_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-22",until = "2017-05-23")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0523_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-23",until = "2017-05-24")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0524_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-24",until = "2017-05-25")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0525_dust.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-25",until = "2017-05-26")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0526_dust.csv")
-
-
-# 미세먼지 tag 트윗 리스트 검ㅅ
-
-string <- '#미세먼지'
-
-
-string <- iconv(string, 'CP949', 'UTF8')
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-16",until = "2017-05-17")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0517_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-17",until = "2017-05-18")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0518_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-18",until = "2017-05-19")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0519_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-19",until = "2017-05-20")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0520_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-20",until = "2017-05-21")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0521_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-21",until = "2017-05-22")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0522_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-22",until = "2017-05-23")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0523_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-23",until = "2017-05-24")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0524_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-24",until = "2017-05-25")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0525_hashtag.csv")
-
-tweets <- searchTwitter(searchString = string, n = 50000, lang="ko", retryOnRateLimit = 10000,since="2017-05-25",until = "2017-05-26")
-tweets
-#make data frame
-df <- do.call("rbind", lapply(tweets, as.data.frame))
-#write to csv file (or your RODBC code)
-write.csv(df,file="twitterList_0526_hashtag.csv")
-
-
-
-
-install.packages("rvest")
-library(rvest)
-
-library(httr)
-
-url_base<-'https://twitter.com/search?f=tweets&vertical=default&q=%EB%AF%B8%EC%84%B8%EB%A8%BC%EC%A7%80&src=typd'
-
-all.reviews<-c()
-
-#for(page in 1:2){
-  
-  url<-paste(url_base, page, sep='')
-  
-  htxt<-read_html(url)
-  
-  comments<-html_nodes(htxt, 'p.TweetTextSize')
-  timestamp<-html_nodes(htxt, 'small.time')
-  
-  #links<-html_nodes(comments, 'a')
-  
-  reviews<-html_text(comments)
-  reviews
-  
-  timestamp<-html_text(timestamp)
-  timestamp
-  if( length(reviews)==0 ){ break }
-  
-  all.reviews<-c(all.reviews, reviews)
-  
-  print(page)
-  
-#}
-
-length(all.reviews)
-
-all.reviews
-
-
-                    
