@@ -1,0 +1,18 @@
+kw0517 <- read.csv("frequency_keyword_2017-05-17.csv", header=T)
+kw0518 <- read.csv("frequency_keyword_2017-05-18.csv", header=T)
+kw0519 <- read.csv("frequency_keyword_2017-05-19.csv", header=T)
+kw0520 <- read.csv("frequency_keyword_2017-05-20.csv", header=T)
+kw0521 <- read.csv("frequency_keyword_2017-05-21.csv", header=T)
+kw0522 <- read.csv("frequency_keyword_2017-05-22.csv", header=T)
+kw0523 <- read.csv("frequency_keyword_2017-05-23.csv", header=T)
+kw0525 <- read.csv("frequency_keyword_2017-05-25.csv", header=T)
+
+merged_frame <- merge(kw0517, kw0518, by='keyword', all=TRUE)
+merged_frame <- merge(merged_frame, kw0519, by='keyword', all=TRUE)
+merged_frame <- merge(merged_frame, kw0520, by='keyword', all=TRUE)
+merged_frame <- merge(merged_frame, kw0521, by='keyword', all=TRUE)
+merged_frame <- merge(merged_frame, kw0522, by='keyword', all=TRUE)
+merged_frame <- merge(merged_frame, kw0523, by='keyword', all=TRUE)
+merged_frame <- merge(merged_frame, kw0525, by='keyword', all=TRUE)
+
+write.csv(merged_frame, 'merged_frame.csv')
